@@ -5,7 +5,7 @@
     <title>王振清</title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <base href="/SpringMybatisMvc/"/>
+    <base href="/spring-mybatis-mvc/"/>
     <!-- basic styles -->
     <link href="static/ace/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="static/ace/css/font-awesome.min.css"/>

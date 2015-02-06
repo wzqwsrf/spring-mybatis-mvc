@@ -25,6 +25,7 @@
                     <td bgcolor="#96E0E2">ID</td>
                     <td bgcolor="#96E0E2">姓名</td>
                     <td bgcolor="#96E0E2">权限</td>
+                    <td bgcolor="#96E0E2">操作</td>
                 </tr>
                 #foreach($user in $userList)
                     <tr>
@@ -32,6 +33,7 @@
                         <td>$oneuser.id</td>
                         <td>$oneuser.name</td>
                         <td>$oneuser.admin</td>
+                        <td><a href="javascript:onDelete('$oneuser.id');">删除</a></td>
                     </tr>
                 #end
             </table>
@@ -43,10 +45,8 @@
 </div>
 <script language=JavaScript>
 
-
-    jQuery(function ($) {
-
-    });
-
+    function onDelete(value){
+        if (confirm("确认删除！")) window.location = "delete?id=" + value ;
+    }
 
 </script>
