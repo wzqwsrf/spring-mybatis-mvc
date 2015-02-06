@@ -1,0 +1,52 @@
+#set($layout = "layout/layout.vm")
+<style type="text/css">
+    td input {
+        width: 100%;
+        text-align: center;
+        color: red;
+        font-size: larger;
+    }
+
+    td {
+        text-align: center;
+    }
+
+</style>
+<div id="common-notice-dialog" class="hide"></div>
+<div class="col-xs-12">
+    <!-- PAGE CONTENT BEGINS -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-xs-9" style="border:solid 1px; background-color: #f0f0f0;text-align: center;"><span
+                    style="font-size:18px">用户以及权限表</span></div>
+            <table class="col-xs-9" style="border-collapse:collapse;" border="1"
+                   id="table1">
+                <tr>
+                    <td bgcolor="#96E0E2">ID</td>
+                    <td bgcolor="#96E0E2">姓名</td>
+                    <td bgcolor="#96E0E2">权限</td>
+                </tr>
+                #foreach($user in $userList)
+                    <tr>
+                        #set($oneuser=$user)
+                        <td>$oneuser.id</td>
+                        <td>$oneuser.name</td>
+                        <td>$oneuser.admin</td>
+                    </tr>
+                #end
+            </table>
+        </div>
+
+    </div>
+
+
+</div>
+<script language=JavaScript>
+
+
+    jQuery(function ($) {
+
+    });
+
+
+</script>
