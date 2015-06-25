@@ -10,8 +10,8 @@ import java.util.List;
  * @Description:
  */
 public interface UserService {
-    public User getById(int id);
-    public void setAdminById(int id, String admin);
-    public void delUserById(int id);
-    public List<User> getAllUserList();
+    User getById(int id);
+    void setAdminById(int id, String admin);
+    void delUserById(int id);
+    List<User> getAllUserList();
 }

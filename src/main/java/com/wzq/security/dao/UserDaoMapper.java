@@ -11,8 +11,8 @@ import java.util.List;
  */
 
 public interface UserDaoMapper {
-    public User getUserById(int id);
-    public void setAdminById(int id, String admin);
-    public void delUserById(int id);
-    public List<User> getAllUsers();
+    User getUserById(int id);
+    void setAdminById(int id, String admin);
+    void delUserById(int id);
+    List<User> getAllUsers();
 }

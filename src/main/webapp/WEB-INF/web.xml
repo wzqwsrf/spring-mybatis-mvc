@@ -3,7 +3,7 @@
          xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
-
+    <display-name>spring-mybatis-mvc</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring.xml,classpath:springmvc-servlet.xml</param-value>
@@ -49,7 +49,7 @@
     <welcome-file-list>
         <welcome-file>/spring/index.html</welcome-file>
     </welcome-file-list>
-    <!-- 配置session超时时间，单位分钟 -->
+     <!--配置session超时时间，单位分钟 -->
     <session-config>
         <session-timeout>15</session-timeout>
     </session-config>

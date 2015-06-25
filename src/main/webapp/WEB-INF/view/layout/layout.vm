@@ -89,7 +89,7 @@
     <div class="sidebar" id="sidebar">
         <ul class="nav nav-list">
             <li>
-                <a href="/user.html">
+                <a href="user_list.html">
                     <span class="menu-text"> 权限表展示 </span>
                 </a>
             </li>

@@ -22,7 +22,7 @@ public class UserController {
     @Autowired(required = true)
     private UserService userService;
 
-    @RequestMapping(value = "/users")
+    @RequestMapping(value = "/user_list.html")
     public ModelAndView addApply(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("/user");
         List<User> userList = userService.getAllUserList();
@@ -39,6 +39,6 @@ public class UserController {
     @RequestMapping(value = "/delete")
     public String delete(@RequestParam("id") String id) {
         userService.delUserById(Integer.valueOf(id));
-        return "redirect:/users";
+        return "redirect:user_list.html";
     }
 }
