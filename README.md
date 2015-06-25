@@ -6,7 +6,7 @@
 4. mvn jetty:run 可以运行项目。
 5. 访问 http://localhost:8080/spring-mybatis-mvc/user_list.html
 6. 界面如图所示
-!['1'](file:/Users/wzqwsrf/Desktop/1.png) 
+!['1'](https://github.com/wzqwsrf/spring-mybatis-mvc/blob/master/view.png) 
 
 ## 配置
 1. `spring-mybatis-mvc/src/main/webapp/WEB-INF/view/layout/layout.vm` 中配置了base url。`<base href="/spring-mybatis-mvc/"/>`，左栏的链接配置也在此文件中。
