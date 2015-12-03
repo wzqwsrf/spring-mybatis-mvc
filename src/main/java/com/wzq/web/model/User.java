@@ -1,4 +1,4 @@
-package com.wzq.security.model;
+package com.wzq.web.model;
 
 /**
  * @Author:wangzhenqing

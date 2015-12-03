@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.wzq.security.dao.UserDaoMapper">
-    <select id="getUserById" parameterType="int" resultType="com.wzq.security.model.User">
-        SELECT * FROM user WHERE id=#{id}
+<mapper namespace="com.wzq.web.dao.UserDaoMapper">
+    <select id="getUserById" parameterType="int" resultType="com.wzq.web.model.User">
+        SELECT * FROM t_user WHERE id=#{id}
     </select>
-    <resultMap id="BaseResultMap" type="com.wzq.security.model.User">
+    <resultMap id="BaseResultMap" type="com.wzq.web.model.User">
         <id property="id" column="id"></id>
         <result property="name" column="name"></result>
         <result property="admin" column="admin"></result>
@@ -17,13 +17,13 @@
     <select id="getAllUsers" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"></include>
-        from user
+        from t_user
     </select>
     <update id="setAdminById" parameterType="int">
-        UPDATE user SET admin=#{admin} WHERE id=#{id}
+        UPDATE t_user SET admin=#{admin} WHERE id=#{id}
     </update>
     <delete id="delUserById" parameterType="int">
-        DELETE FROM user WHERE id=#{id}
+        DELETE FROM t_user WHERE id=#{id}
     </delete>
 
 </mapper>

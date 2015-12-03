@@ -1,6 +1,6 @@
-package com.wzq.security.service;
+package com.wzq.web.service;
 
-import com.wzq.security.model.User;
+import com.wzq.web.model.User;
 
 import java.util.List;
 
