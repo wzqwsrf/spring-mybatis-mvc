@@ -1,0 +1,745 @@
+#set($layout = "layout/layout.vm")
+<style type="text/css">
+    td input {
+        width: 100%;
+        text-align: center;
+        color: red;
+        font-size: larger;
+    }
+
+    td {
+        text-align: center;
+    }
+
+</style>
+<div id="common-notice-dialog" class="hide"></div>
+<div class="col-xs-12">
+    <!-- PAGE CONTENT BEGINS -->
+    <div style="text-align: center" class="col-xs-9">
+        <h3 class="header smaller lighter blue" style="margin-left: auto;margin-right: auto;">日常费用报销单</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-xs-9" style="border:solid 1px; background-color: #f0f0f0;text-align: center;"><span
+                    style="font-size:18px">个人基本信息</span></div>
+            <table style="border-collapse:collapse;" border="1" class="col-xs-9"
+                   id="table">
+                <tr>
+                    <td>申请人</td>
+                    <td><input type="text" readonly="readonly"></td>
+                    <td>员工编号</td>
+                    <td><input type="text" readonly="readonly"></td>
+                    <td>申请日期</td>
+                    <td><input type="text" style="color:red" readonly="readonly"></td>
+                </tr>
+                <tr>
+                    <td>一级部门</td>
+                    <td><input type="text" readonly="readonly"></td>
+                    <td>申请部门</td>
+                    <td><input type="text" readonly="readonly"></td>
+                    <td>部门编号</td>
+                    <td><input type="text" readonly="readonly"></td>
+                </tr>
+                <tr>
+                    <td>是否直接向VP汇报</td>
+                    <td>
+                        <form action="" method="get">
+                            <input name="Fruit" type="radio" checked="false" style="width:25% !important"
+                                   value="是"/><span style="width:10%">是</span>
+                            <input name="Fruit" type="radio" checked="true" style="width:25% !important"
+                                   value="否"/><span style="width:10%">否</<span>
+                        </form>
+                    </td>
+                    <td>银行卡号</td>
+                    <td><input type="text" readonly="readonly"></td>
+                    <td>银行开户行</td>
+                    <td><input type="text" readonly="readonly"></td>
+                </tr>
+                <tr>
+                    <td>是否有借款</td>
+                    <td>
+                        <form action="" method="get">
+                            <input name="Fruit" type="radio" checked="false" style="width:25% !important"
+                                   value="是"/><span style="width:10%">是</span>
+                            <input name="Fruit" type="radio" checked="true" style="width:25% !important"
+                                   value="否"/><span style="width:10%">否</<span>
+                        </form>
+                    </td>
+                    <td>借款单流水号</td>
+                    <td><input type="text" readonly="readonly"></td>
+                    <td>借款金额</td>
+                    <td><input type="text" readonly="readonly"></td>
+                </tr>
+                <tr>
+            </table>
+            <table style="border-collapse:collapse;" border="1" class="col-xs-9">
+                <tr>
+                    <td>报销金额总计</td>
+                    <td><input type="text" value="0.00" id="sum" readonly="readonly"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-xs-9" style="border:solid 1px; background-color: #f0f0f0;text-align: center;"><span
+                    style="font-size:18px">出租车费明细(含汽车燃油费)</span></div>
+            <table frame="vsides" class="col-xs-9"
+                   id="table1">
+                <tr>
+                    <td bgcolor="#96E0E2">日期</td>
+                    <td bgcolor="#96E0E2">起点</td>
+                    <td bgcolor="#96E0E2">终点</td>
+                    <td bgcolor="#96E0E2">具体时间</td>
+                    <td bgcolor="#96E0E2">用途</td>
+                    <td bgcolor="#96E0E2">同行人(姓名)</td>
+                    <td bgcolor="#96E0E2">工时</td>
+                    <td bgcolor="#96E0E2">金额</td>
+                    <td bgcolor="#96E0E2">备注</td>
+                    <td bgcolor="#96E0E2" style="width:20px !important">
+                        <input type="button" name="Submit" value="添加报销" onclick=addRow("table1")>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="input-icon input-icon-right">
+            <input type="text" onclick="showTimeAndLabor('table1', this)"/>
+            <i class="icon-calendar green"></i>
+        </span></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text" onblur="addMoney('table1')"></td>
+                    <td><input type="text"></td>
+                    <td>&nbsp;</td>
+
+                </tr>
+            </table>
+            <table style="border-collapse:collapse;" border="1" class="col-xs-9">
+                <tr>
+                    <td>金额总计</td>
+                    <td><input type="text" value="0.00" id="sum1" readonly="readonly"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-xs-9" style="border:solid 1px; background-color: #f0f0f0;text-align: center;"><span
+                    style="font-size:18px">通信费</span></div>
+            <table frame="vsides" class="col-xs-9"
+                   id="table6">
+                <tr>
+                    <td>金额</td>
+                    <td><input type="text" value="0.00" id="sum6" onblur="addMoney('table6')"></td>
+                    <td>备注(话费实际发生月份)</td>
+                    <td><input type="text" id="remark"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-xs-9" style="border:solid 1px; background-color: #f0f0f0;text-align: center;"><span
+                    style="font-size:18px">餐费明细(每人每餐报销不超过50元)</span></div>
+            <table frame="vsides" class="col-xs-9"
+                   id="table2">
+                <tr>
+                    <td bgcolor="#96E0E2">日期</td>
+                    <td bgcolor="#96E0E2">就餐地点</td>
+                    <td bgcolor="#96E0E2">同行人(姓名)</td>
+                    <td bgcolor="#96E0E2">就餐人数</td>
+                    <td bgcolor="#96E0E2">实报金额</td>
+                    <td bgcolor="#96E0E2">人均餐费</td>
+                    <td bgcolor="#96E0E2">发票金额</td>
+                    <td bgcolor="#96E0E2">工时</td>
+                    <td bgcolor="#96E0E2">备注</td>
+                    <td bgcolor="#96E0E2"><input type="button" name="Submit" value="添加报销"
+                                                 onclick=addRow("table2")></td>
+                </tr>
+                <tr>
+                    <td><span class="input-icon input-icon-right">
+            <input type="text" onclick="showTimeAndLabor('table2', this)"/>
+            <i class="icon-calendar green"></i>
+        </span></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text" onblur="avgMoney('table2', this)"></td>
+                    <td><input type="text" onblur="addMoney('table2'), avgMoney('table2', this)"></td>
+                    <td><input type="text" style="readonly:true" value="0.00"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                </tr>
+            </table>
+            <table style="border-collapse:collapse;" border="1" class="col-xs-9">
+                <tr>
+                    <td>金额总计</td>
+                    <td><input type="text" value="0.00" id="sum2" readonly="readonly"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-xs-9" style="border:solid 1px; background-color: #f0f0f0;text-align: center;"><span
+                    style="font-size:18px">招待费明细</span></div>
+            <table frame="vsides" class="col-xs-9"
+                   id="table3">
+                <tr>
+                    <td bgcolor="#96E0E2">日期</td>
+                    <td bgcolor="#96E0E2">地点</td>
+                    <td bgcolor="#96E0E2">业务目的</td>
+                    <td bgcolor="#96E0E2">客户单位</td>
+                    <td bgcolor="#96E0E2">客户姓名</td>
+                    <td bgcolor="#96E0E2">参加人数</td>
+                    <td bgcolor="#96E0E2">金额</td>
+                    <td bgcolor="#96E0E2">备注</td>
+                    <td bgcolor="#96E0E2"><input type="button" name="Submit" value="添加报销"
+                                                 onclick=addRow("table3")></td>
+                </tr>
+                <tr>
+                    <td><span class="input-icon input-icon-right">
+            <input type="text" onclick="showTime()"/>
+            <i class="icon-calendar green"></i>
+        </span></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text" onblur="addMoney('table3')"></td>
+                    <td><input type="text"></td>
+                </tr>
+            </table>
+            <table style="border-collapse:collapse;" border="1" class="col-xs-9">
+                <tr>
+                    <td>金额总计</td>
+                    <td><input type="text" value="0.00" id="sum3" readonly="readonly"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-xs-9" style="border:solid 1px; background-color: #f0f0f0;text-align: center;"><span
+                    style="font-size:18px">员工关系费明细</span></div>
+            <table frame="vsides" class="col-xs-9"
+                   id="table4">
+                <tr>
+                    <td bgcolor="#96E0E2">日期</td>
+                    <td bgcolor="#96E0E2">地点</td>
+                    <td bgcolor="#96E0E2">同行人(姓名)</td>
+                    <td bgcolor="#96E0E2">活动目的</td>
+                    <td bgcolor="#96E0E2">金额</td>
+                    <td bgcolor="#96E0E2">备注</td>
+                    <td bgcolor="#96E0E2"><input type="button" name="Submit" value="添加报销"
+                                                 onclick=addRow("table4")></td>
+                </tr>
+                <tr>
+                    <td><span class="input-icon input-icon-right">
+            <input type="text" onclick="showTime()"/>
+            <i class="icon-calendar green"></i>
+        </span></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text" onblur="addMoney('table4')"></td>
+                    <td><input type="text"></td>
+                </tr>
+            </table>
+            <table style="border-collapse:collapse;" border="1" class="col-xs-9">
+                <tr>
+                    <td>金额总计</td>
+                    <td><input type="text" value="0.00" id="sum4" readonly="readonly"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-xs-9" style="border:solid 1px; background-color: #f0f0f0;text-align: center;"><span
+                    style="font-size:18px">其他费用</span></div>
+            <table frame="vsides" class="col-xs-9"
+                   id="table5">
+                <tr>
+                    <td bgcolor="#96E0E2">费用项目</td>
+                    <td bgcolor="#96E0E2">金额</td>
+                    <td bgcolor="#96E0E2">备注</td>
+                    <td bgcolor="#96E0E2"><input type="button" name="Submit" value="添加报销"
+                                                 onclick=addRow("table5")></td>
+                </tr>
+                <tr>
+                    <td><input type="text"></td>
+                    <td><input type="text" onblur="addMoney('table5')"></td>
+                    <td><input type="text"></td>
+                </tr>
+            </table>
+            <table style="border-collapse:collapse;" border="1" class="col-xs-9">
+                <tr>
+                    <td>金额总计</td>
+                    <td><input type="text" value="0.00" id="sum5" readonly="readonly"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div style="float:right;margin-top:20px;margin-bottom:10px; margin-right:30%;">
+            <button class="btn btn-info" type="button"
+                    onclick="subTableInfos(true);">
+                <i class="icon-arrow-right bigger-110"></i>
+                保存并提交
+            </button>
+            <button class="btn btn-info" type="button"
+                    onclick="subTableInfos(false);">
+                <i class="icon-arrow-up bigger-110"></i>
+                暂存草稿
+            </button>
+            <button class="btn" type="reset">
+                <i class="icon-undo bigger-110"></i>
+                取消申请
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="apply-result-dialog" class="hide"></div>
+
+<script src="/oaengine/static/js/utils.js"></script>
+<script src="/oaengine/static/js/dialog_common.js"></script>
+<script src="/oaengine/static/My97DatePicker/WdatePicker.js"></script>
+<script language=JavaScript>
+
+    EDIT_OR_NEW = true;
+    TABLE_LIST = ["table1", "table2", "table3", "table4", "table5"];
+    LEN = TABLE_LIST.length;
+    REGEX = new RegExp("^[0-9]*$");
+    FORMID = "";
+
+    jQuery(function ($) {
+        var url = location.search;
+        if (url.indexOf('formId') != -1) {
+            var formId = url.split('=')[1];
+            EDIT_OR_NEW = false;
+            FORMID = formId;
+//          这里需要更新form信息.
+            createEditApplyTable(formId);
+        } else {
+            createNewAddApplyTable();
+        }
+
+    });
+
+    function showTime() {
+        WdatePicker({dateFmt: 'yyyy-MM-dd'});
+    }
+
+    function showTimeAndLabor(tableId, curRow) {
+        WdatePicker({
+            dateFmt: 'yyyy-MM-dd', maxDate: '%y-%M-%d', onpicked: function () {
+                workHour(tableId, curRow)
+            }
+        });
+    }
+
+    //  新建表
+    function createNewAddApplyTable() {
+        jQuery.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            url: "oa/employeeinfo",
+            type: "GET",
+            success: function (resp) {
+                if (resp.errorCode == 0) {
+                    var data = resp.data;
+                    var table = document.getElementById("table");
+                    var k = 0;
+                    for (var i = 0; i < 2; i++) {
+                        for (var j = 1; j < 6; j += 2) {
+                            if (k >= 5) {
+                                break;
+                            }
+                            table.rows[i].cells[j].childNodes[0].value = data[k];
+                            k++;
+                        }
+                    }
+                } else {
+                    showCommonNoticeDialog('失败', 'icon-warning-sign',
+                            generateNoticeMsg(resp.errorMessage), 300);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showCommonNoticeDialog('网络错误', 'icon-bolt',
+                        generateNoticeMsg('网络错误，请刷新后重试!'), 300);
+            }
+        });
+    }
+
+
+    function createEditApplyTable(formId) {
+        var params = {
+            "vars": {
+                "formId": formId
+            }
+        };
+        jQuery.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            url: "oa/apply_info",
+            type: "POST",
+            data: JSON.stringify(params),
+            success: function (resp) {
+                if (resp.errorCode == 0) {
+                    var data = resp.data;
+                    var tableMap = data.tableMap;
+                    var vars = data.vars;
+                    getDataToEditDialog(tableMap, vars);
+
+                } else {
+                    showCommonNoticeDialog('失败', 'icon-warning-sign',
+                            generateNoticeMsg(resp.errorMessage), 300);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showCommonNoticeDialog('网络错误', 'icon-bolt',
+                        generateNoticeMsg('网络错误，请刷新后重试!'), 300);
+            }
+        });
+    }
+
+
+    function constructTable0Info(tableMap) {
+        var table0 = tableMap["table"];
+        var table = document.getElementById("table");
+        var k = 0;
+        for (var i = 0; i < 4; i++) {
+            for (var j = 1; j < 6; j += 2) {
+                var value = table0[0][k];
+                if (isNull(value)) {
+                    value = "";
+                }
+                table.rows[i].cells[j].childNodes[0].value = value;
+                k++;
+            }
+        }
+
+    }
+    function constructAllTableInfo(tableMap) {
+        var len = 6;
+        for (var i = 1; i < len; i++) {
+            var tableId = "table" + i;
+            var table = document.getElementById(tableId);
+            var tableInfo = tableMap[tableId];
+            var tableLen = tableInfo.length;
+            if (tableLen == 0) { //没有数据,不处理了.
+                continue;
+            }
+//          增加内容
+            var rowLen = table.rows.length;
+            var coLen = table.rows[0].cells.length;
+            for (var j = 0; j < tableLen; j++) {
+                var nRow = table.insertRow(rowLen);
+
+                for (var k = 0; k < coLen - 1; k++) {
+                    var value = tableInfo[j][k];
+                    if (isNull(value)) {
+                        value = "";
+                    }
+                    var cell = nRow.insertCell(k);
+                    cell.innerHTML = table.rows[rowLen - 1].cells[k].innerHTML;
+                    if (k == 0) {
+                        cell.childNodes[0].childNodes[1].value = value;
+                    } else {
+                        cell.childNodes[0].value = value;
+                    }
+                }
+                cell = nRow.insertCell(coLen - 1);
+                cell.innerHTML = "<div align='center' style='width:40px'><a href='javascript:;' " +
+                        "onclick=\"deleteRow('" + tableId + "',this)\">删除</a></div>";
+                rowLen += 1;
+            }
+            table.deleteRow(1);//删掉第一行.
+        }
+    }
+    function getDataToEditDialog(tableMap, vars) {
+
+        constructTable0Info(tableMap);
+        constructAllTableInfo(tableMap)
+        for (var i = 1; i < 7; i++) {
+            var sumOne = "sum" + i;
+            var sum = vars[sumOne];
+            $("#" + sumOne).val(sum);
+        }
+        $("#sum").val(vars["sum"]);
+        $("#remark").val(vars["remark"]);
+
+    }
+
+    function workHour(tableId, curRow) {
+        var table = document.getElementById(tableId);
+        var rowId = curRow.parentNode.parentNode.parentNode.rowIndex;
+        var dateTime = table.rows[rowId].cells[0].childNodes[0].childNodes[1].value;
+        var params = {
+            "vars": {
+                "day": dateTime
+            }
+        };
+        jQuery.ajax({
+            contentType: "application/json; charset=utf-8",
+            url: "oa/labor",
+            type: "POST",
+            data: JSON.stringify(params),
+            success: function (resp) {
+                console.log(resp);
+                if (resp.errorCode == 0) {
+                    var data = resp.data;
+                    if (tableId == "table1") {
+                        table.rows[rowId].cells[6].childNodes[0].value = data[0];
+                    } else if (tableId == "table2") {
+                        table.rows[rowId].cells[7].childNodes[0].value = data[0];
+                    }
+                } else {
+                    showCommonNoticeDialog('失败', 'icon-warning-sign',
+                            generateNoticeMsg(resp.errorMessage), 300);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showCommonNoticeDialog('网络错误', 'icon-bolt',
+                        generateNoticeMsg('网络错误，请刷新后重试!'), 300);
+            }
+        });
+    }
+    function addRow(tableId) { //读取最后一行的行号，存放在txtTRLastIndex文本框中
+        var table = document.getElementById(tableId);
+        var rowLen = table.rows.length;
+        var coLen = table.rows[0].cells.length;
+        var nRow = table.insertRow(rowLen);
+        for (var i = 0; i < coLen - 1; i++) {
+            var cell = nRow.insertCell(i);
+            cell.innerHTML = table.rows[rowLen - 1].cells[i].innerHTML;
+        }
+        cell = nRow.insertCell(coLen - 1);
+        cell.innerHTML = "<div align='center' style='width:40px'><a href='javascript:;' " +
+                "onclick=\"deleteRow('" + tableId + "',this)\">删除</a></div>";
+        addMoney(tableId);
+    }
+
+
+    //删除指定行
+    function deleteRow(tableId, curRow) {
+        var table = document.getElementById(tableId);
+        var rowLen = table.rows.length;
+        if (rowLen == 2) {
+            showCommonNoticeDialog('失败', 'icon-warning-sign',
+                    generateNoticeMsg("啊哦,就剩一行了,不能删除了!"), 300);
+            return;
+        }
+        var rowId = curRow.parentNode.parentNode.parentNode.rowIndex;
+        table.deleteRow(rowId);
+        addMoney(tableId);
+    }
+
+    function addMoney(tableId) {
+
+        if (containsValue(TABLE_LIST, tableId)) {
+            var table = document.getElementById(tableId);
+            var rowLen = table.rows.length;
+            var coLen = table.rows[0].cells.length;
+            var tableSum = 0;
+            for (var i = 1; i < rowLen; i++) {
+                var innerSum = '';
+                if (tableId == "table2") {
+                    innerSum = table.rows[i].cells[coLen - 6].childNodes[0].value;
+                } else if (tableId == "table3") {
+                    innerSum = table.rows[i].cells[coLen - 2].childNodes[0].value;
+                } else {
+                    innerSum = table.rows[i].cells[coLen - 3].childNodes[0].value;
+                }
+
+                if (isNull(innerSum)) {
+                    innerSum = 0;
+                } else if (!REGEX.test(innerSum)) {
+                    continue;
+                } else {
+                    innerSum = parseFloat(innerSum);
+                }
+                tableSum = parseFloat(tableSum);
+                tableSum += innerSum;
+            }
+            var length = tableId.length;
+            var id = tableId.substr(length - 1);
+            $("#sum" + id).val(tableSum.toFixed(2));
+        }
+
+        var sum = 0;
+        for (i = 1; i < 7; i++) {
+            innerSum = $("#sum" + i).val();
+            if (isNull(innerSum)) {
+                innerSum = 0.00;
+            } else if (!REGEX.test(innerSum)) {
+                continue;
+            } else {
+                innerSum = parseFloat(innerSum);
+            }
+            sum = parseFloat(sum);
+            sum += innerSum;
+        }
+        $("#sum").val(sum.toFixed(2));
+    }
+
+    function avgMoney(tableId, curRow) {
+        var table = document.getElementById(tableId);
+        var rowId = curRow.parentNode.parentNode.rowIndex;
+        var num = table.rows[rowId].cells[3].childNodes[0].value;
+        var money = table.rows[rowId].cells[4].childNodes[0].value;
+        if (!isNull(num) && !isNull(money)) {
+            var evMoney = parseFloat(money) / parseInt(num);
+            evMoney = parseFloat(evMoney);
+            table.rows[rowId].cells[5].childNodes[0].value = evMoney.toFixed(2);
+        }
+    }
+
+    function subTableInfos(flag) {
+//      如果是编辑跳转过来的页面,需要更新表单.
+//      如果是新建页面，保存提交需要校验，直接new 表单。
+        if(flag){//保存并提交，需要验证。
+            var form = validateInput();
+            if (form.length > 1) {
+                showResultDialog("apply-result-dialog", "警告", 'icon-lightbulb',
+                        generateNoticeMsg(form), 400);
+                return;
+            }
+        }
+        var params = {};
+        var vars = {};
+        for (var i = 1; i < 7; i++) {
+            vars["sum" + i] = $("#sum" + i).val();
+        }
+        vars["sum"] = $("#sum").val();
+        vars["remark"] = $("#remark").val();
+        var tableMap = {};
+        var len = TABLE_LIST.length;
+        for (i = 0; i < len; i++) {
+            var tableId = TABLE_LIST[i];
+            var table = document.getElementById(tableId);
+            var rowLen = table.rows.length;
+            var coLen = table.rows[0].cells.length;
+            var list = new Array();
+            for (var j = 1; j < rowLen; j++) {
+                list[j - 1] = new Array();
+                for (var k = 0; k < coLen - 1; k++) {
+                    list[j - 1][k] = table.rows[j].cells[k].childNodes[0].value;
+                    if (tableId != "table5" && k == 0) {
+                        list[j - 1][k] = table.rows[j].cells[k].childNodes[0].childNodes[1].value;
+                    }
+                    if (isNull(list[j - 1][k])) {
+                        list[j - 1][k] = "";
+                    }
+                }
+            }
+            tableMap[tableId] = list;
+        }
+        //table 基本信息
+        table = document.getElementById("table");
+        list = new Array();
+        list[0] = new Array();
+        k = 0;
+        for (i = 0; i < 4; i++) {
+            for (j = 1; j < 6; j += 2) {
+                if ((i == 2 || i == 3) && j == 1) {
+                    var input = table.rows[i].cells[j].childNodes[1].childNodes;
+                    var input1 = input[1];
+                    var input2 = input[4];
+                    if (input1.checked) {
+                        list[0][k] = input1.value;
+                    } else if (input2.checked) {
+                        list[0][k] = input2.value;
+                    }
+                } else {
+                    list[0][k] = table.rows[i].cells[j].childNodes[0].value;
+                }
+                if (isNull(list[0][k])) {
+                    list[0][k] = "";
+                }
+                k++;
+            }
+        }
+        tableMap["table"] = list;
+        vars["formId"] = FORMID;
+        params["vars"] = vars;
+        params["tableMap"] = tableMap;
+        params["flag1"] = flag;
+        params["flag2"] = EDIT_OR_NEW;
+        jQuery.ajax({
+            contentType: "application/json; charset=utf-8",
+            url: "oa/data",
+            type: "POST",
+            data: JSON.stringify(params),
+            success: function (resp) {
+                if (resp.errorCode == 0) {
+                    showCommonNoticeDialog('成功', 'icon-warning-sign',
+                            generateNoticeMsg("创建报销申请成功！"), 300);
+                    window.location.href = '/oaengine/oa/apply_todo.html';
+                } else {
+                    showCommonNoticeDialog('失败', 'icon-warning-sign',
+                            generateNoticeMsg(resp.errorMessage), 300);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showCommonNoticeDialog('网络错误', 'icon-bolt',
+                        generateNoticeMsg('网络错误，请刷新后重试!'), 300);
+            }
+        })
+    }
+
+    function validateInput() {
+        var errorMsgList = ["出租车费", "餐费", "招待费用", "员工关系费", "其他费用"];
+        var dic = {};
+        for (var i = 0; i < LEN; i++) {
+            dic[TABLE_LIST[i]] = errorMsgList[i];
+        }
+        var form = "";
+        for (i = 0; i < LEN; i++) {
+            var tableId = TABLE_LIST[i];
+            var table = document.getElementById(tableId);
+            var rowLen = table.rows.length;
+            var coLen = table.rows[0].cells.length;
+            var tableSum = 0;
+            for (var j = 1; j < rowLen; j++) {
+                var innerSum = '';
+                var col = coLen - 3;
+                if (tableId == "table2") {
+                    col = coLen - 6;
+                } else if (tableId == "table3") {
+                    col = coLen - 2;
+                }
+                innerSum = table.rows[j].cells[col].childNodes[0].value;
+                if (!REGEX.test(innerSum)) {
+                    form += jQuery.parseStr("<div>%s</div>", dic[tableId] + ": " +
+                            j + " 行 " + col + " 列, 金额填写不为数字,请检查!"
+                    );
+                }
+            }
+        }
+        var sum6 = $("#sum6").val();
+        if (!REGEX.test(sum6)) {
+            form += jQuery.parseStr("<div>%s</div>", "通信费: 金额填写不为数字,请检查!");
+        }
+        return form;
+    }
+
+</script>
