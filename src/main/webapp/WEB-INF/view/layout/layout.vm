@@ -93,6 +93,13 @@
                 </a>
             </li>
         </ul>
+        <ul class="nav nav-list">
+            <li>
+                <a href="add_user.html">
+                    <span class="menu-text"> 添加用户 </span>
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="main-content">
         <div class="page-content">

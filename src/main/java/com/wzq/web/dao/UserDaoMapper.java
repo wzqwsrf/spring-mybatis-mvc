@@ -1,6 +1,7 @@
 package com.wzq.web.dao;
 
 import com.wzq.web.model.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,8 +12,9 @@ import java.util.List;
  */
 
 public interface UserDaoMapper {
-    User getUserById(int id);
-    void setAdminById(int id, String admin);
-    void delUserById(int id);
+    User getUserById(@Param("id") int id);
+    void setAdminById(@Param("id") int id, @Param("admin") String admin);
+    void delUserById(@Param("id") int id);
     List<User> getAllUsers();
+    void addUser(@Param("user") User user);
 }

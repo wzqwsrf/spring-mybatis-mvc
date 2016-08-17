@@ -5,10 +5,7 @@ import com.wzq.web.result.BaseResult;
 import com.wzq.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +20,7 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    @Autowired(required = true)
+    @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/user_list.html")
@@ -58,11 +55,14 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "oa/data")
+    @RequestMapping(value = "add_data", method= RequestMethod.POST)
     @ResponseBody
-    public BaseResult webPostData(HttpServletRequest request,
-                                  @RequestBody User user) {
-        return new BaseResult();
+    public BaseResult webPostData(@RequestBody User user) {
+        System.out.println(user.getName());
+        System.out.println(user.getAdmin());
+        userService.addUser(user);
+
+        return BaseResult.getSuccessResult("adad");
     }
 
 }

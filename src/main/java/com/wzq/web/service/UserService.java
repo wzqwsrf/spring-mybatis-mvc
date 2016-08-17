@@ -14,4 +14,5 @@ public interface UserService {
     void setAdminById(int id, String admin);
     void delUserById(int id);
     List<User> getAllUserList();
+    void addUser(User user);
 }
