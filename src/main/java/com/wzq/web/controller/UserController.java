@@ -58,11 +58,7 @@ public class UserController {
     @RequestMapping(value = "add_data", method= RequestMethod.POST)
     @ResponseBody
     public BaseResult webPostData(@RequestBody User user) {
-        System.out.println(user.getName());
-        System.out.println(user.getAdmin());
         userService.addUser(user);
-
-        return BaseResult.getSuccessResult("adad");
+        return BaseResult.getSuccessResult("成功"+user.toString());
     }
-
 }

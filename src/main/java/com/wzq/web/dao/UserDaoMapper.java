@@ -12,9 +12,9 @@ import java.util.List;
  */
 
 public interface UserDaoMapper {
-    User getUserById(@Param("id") int id);
+    User getUserById(int id);
     void setAdminById(@Param("id") int id, @Param("admin") String admin);
-    void delUserById(@Param("id") int id);
+    void delUserById(int id);
     List<User> getAllUsers();
     void addUser(@Param("user") User user);
 }

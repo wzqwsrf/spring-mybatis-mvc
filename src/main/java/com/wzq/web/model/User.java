@@ -10,6 +10,14 @@ public class User {
     private String name;
     private String admin;
 
+    public User() {
+    }
+
+    public User(String name, String admin) {
+        this.name = name;
+        this.admin = admin;
+    }
+
     public int getId() {
         return id;
     }
